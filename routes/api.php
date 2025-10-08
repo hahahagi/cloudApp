@@ -11,8 +11,11 @@ Route::get('auth/register', function () {
     ]);
 });
 
-// Protected route to list users
-Route::middleware('auth:sanctum')->get('auth/users', [\App\Http\Controllers\Api\Auth\UserController::class, 'index']);
+// Protected user routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('auth/users', [\App\Http\Controllers\Api\Auth\UserController::class, 'index']);
+    Route::get('auth/users/{user}', [\App\Http\Controllers\Api\Auth\UserController::class, 'show']);
+});
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('auth/me', [\App\Http\Controllers\Api\Auth\AuthenticatedUserController::class, 'me']);
     Route::post('auth/logout', [\App\Http\Controllers\Api\Auth\AuthenticatedUserController::class, 'logout']);

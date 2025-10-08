@@ -35,4 +35,15 @@ class UserController extends Controller
             ],
         ]);
     }
+
+    /**
+     * Display a single user by id (route model binding).
+     *
+     * @param User $user
+     * @return UserResource
+     */
+    public function show(User $user)
+    {
+        return new UserResource($user);
+    }
 }
